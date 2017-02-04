@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -eo pipefail
+set -x
 function export_env_dir() {
   env_dir=$1
   whitelist_regex=${2:-''}
@@ -62,7 +63,7 @@ else
     MD5_HEADER=()
 fi
 
-curl -sfSo $CACHED_PROTOBUF_TARBALL \
+curl -LsfSo $CACHED_PROTOBUF_TARBALL \
     "${MD5_HEADER[@]}" $PROTOBUF_TARBALL_URL
 
 tar xzf $CACHED_PROTOBUF_TARBALL -C $VENDOR_DIR
